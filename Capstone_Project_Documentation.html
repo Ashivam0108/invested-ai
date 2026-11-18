@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invested – Capstone Project Documentation</title>
+  <style>
+    /* ─── Page / Print Setup ─── */
+    @page {
+      size: A4;
+      margin: 25mm 20mm 25mm 25mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: #1a1a1a;
+      line-height: 1.75;
+      background: #fff;
+    }
+
+    /* ─── Page Wrapper (screen preview) ─── */
+    .page-wrapper {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25mm 20mm 25mm 25mm;
+      position: relative;
+    }
+
+    /* ─── Page Break ─── */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    /* ─── Typography ─── */
+    h1 {
+      font-size: 22px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+
+    h2 {
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      margin-top: 22px;
+      margin-bottom: 6px;
+      color: #1a1a1a;
+      border-bottom: 1.5px solid #333;
+      padding-bottom: 3px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      color: #1a1a1a;
+    }
+
+    p {
+      font-size: 12px;
+      text-align: justify;
+      margin-bottom: 8px;
+    }
+
+    ul, ol {
+      margin: 6px 0 10px 22px;
+    }
+
+    li {
+      font-size: 12px;
+      text-align: justify;
+      margin-bottom: 4px;
+      line-height: 1.7;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    /* ─── Title Page ─── */
+    .title-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 247mm;   /* A4 height minus margins */
+      text-align: center;
+    }
+
+    .title-page .subtitle {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    .title-page .project-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0a2342;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .title-page .tagline {
+      font-size: 13px;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 50px;
+    }
+
+    .info-table {
+      border-collapse: collapse;
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .info-table td {
+      font-size: 12px;
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    .info-table td:first-child {
+      font-weight: bold;
+      background: #f0f4ff;
+      width: 40%;
+      color: #0a2342;
+    }
+
+    .divider {
+      width: 60%;
+      border: none;
+      border-top: 1.5px solid #ccc;
+      margin: 20px auto;
+    }
+
+    /* ─── Screenshot Placeholder ─── */
+    .screenshot-box {
+      border: 1.5px dashed #888;
+      background: #f8f8f8;
+      padding: 18px 14px;
+      margin: 10px 0 14px 0;
+      text-align: center;
+      color: #555;
+      font-style: italic;
+      font-size: 11.5px;
+      border-radius: 4px;
+    }
+
+    /* ─── Page Numbers (print only) ─── */
+    @media print {
+      body {
+        width: 210mm;
+      }
+
+      .page-wrapper {
+        width: 100%;
+        padding: 25mm 20mm 25mm 25mm;
+      }
+
+      /* Footer with page number */
+      body::after {
+        content: "";
+        display: block;
+      }
+
+      /* Using CSS counter for page numbers */
+      .page-num-footer {
+        position: fixed;
+        bottom: 10mm;
+        right: 15mm;
+        font-size: 11px;
+        color: #555;
+      }
+    }
+
+    /* Screen preview: show page numbers as footer inside cards */
+    .page-num-footer {
+      text-align: right;
+      font-size: 10.5px;
+      color: #888;
+      margin-top: 16px;
+      padding-top: 6px;
+      border-top: 1px solid #eee;
+    }
+
+    .content-section {
+      margin-bottom: 4px;
+    }
+
+    /* Tech Stack Table */
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .tech-table th {
+      background: #0a2342;
+      color: #fff;
+      padding: 7px 12px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .tech-table td {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      vertical-align: top;
+    }
+
+    .tech-table tr:nth-child(even) td {
+      background: #f5f7fc;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e8eef8;
+      color: #0a2342;
+      border: 1px solid #b0c0e0;
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-size: 10.5px;
+      margin: 1px 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 1 — TITLE PAGE
+══════════════════════════════════════════════════════════ -->
+<div class="page-wrapper">
+  <div class="title-page">
+
+    <p class="subtitle">Capstone / Mini Project Documentation</p>
+    <p style="font-size:12px;color:#777;margin-bottom:30px;">
+      Artificial Intelligence Laboratory &nbsp;|&nbsp; Academic Year 2025–26
+    </p>
+
+    <div class="project-title">INVESTED</div>
+    <p class="tagline">AI-Powered Personal Finance Companion</p>
+
+    <hr class="divider" />
+
+    <table class="info-table">
+      <tr>
+        <td>Student Name</td>
+        <td>Shivam</td>
+      </tr>
+      <tr>
+        <td>Roll Number</td>
+        <td>23052266</td>
+      </tr>
+      <tr>
+        <td>Batch / Program</td>
+        <td>2023, CSE, B.Tech</td>
+      </tr>
+      <tr>
+        <td>Institution</td>
+        <td>KIIT DU</td>
+      </tr>
+      <tr>
+        <td>Submission Date</td>
+        <td>April 2026</td>
+      </tr>
+    </table>
+
+    <hr class="divider" />
+    <p style="font-size:11px;color:#999;margin-top:10px;">
+      This document is submitted in partial fulfillment of the requirements for the
+      completion of the Capstone/Mini Project component of the curriculum.
+    </p>
+  </div>
+  <div class="page-num-footer">1</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 2 — PROBLEM STATEMENT + SOLUTION OVERVIEW
+══════════════════════════════════════════════════════════ -->
+<div class="page-wrapper page-break">
+
+  <!-- PROBLEM STATEMENT -->
+  <div class="content-section">
+    <h2>1. Problem Statement</h2>
+
+    <p>
+      Managing personal finances is a growing challenge for the modern Indian individual.
+      The average working professional juggles multiple financial products simultaneously —
+      bank accounts, credit cards, EPF (Employee Provident Fund) balances, mutual funds,
+      and loan EMIs — yet has no single platform that consolidates all of this data and
+      provides <em>actionable</em>, contextual guidance in real time.
+    </p>
+
+    <p>
+      Existing solutions like banking apps or spreadsheet trackers present raw numbers but
+      offer no intelligent interpretation. A user who wants to know "am I investing enough
+      for retirement?" or "do I have any suspicious transactions this month?" has to
+      manually cross-reference multiple portals and perform their own analysis — a process
+      that is time-consuming, error-prone, and out of reach for the financially
+      inexperienced.
+    </p>
+
+    <h3>Why This Problem Matters</h3>
+    <ul>
+      <li>
+        <strong>Financial illiteracy is widespread:</strong> A large segment of India's
+        working population lacks the tools or knowledge to make informed investment and
+        spending decisions.
+      </li>
+      <li>
+        <strong>Data is siloed:</strong> Financial data is spread across banks, government
+        portals, and credit bureaus with no standardised way to access it holistically.
+      </li>
+      <li>
+        <strong>Fraud and anomalies go undetected:</strong> Without proactive monitoring,
+        suspicious transactions or credit score drops often go unnoticed for months.
+      </li>
+      <li>
+        <strong>Generic advice is ineffective:</strong> Cookie-cutter financial advice
+        ignores individual spending patterns, income levels, and goals.
+      </li>
+    </ul>
+  </div>
+
+  <!-- SOLUTION OVERVIEW -->
+  <div class="content-section">
+    <h2>2. Solution Overview</h2>
+
+    <p>
+      <strong>Invested</strong> is an end-to-end, multi-service personal finance
+      application that bridges the gap between raw financial data and actionable
+      intelligence. It acts as an AI-powered financial strategist that lives in the
+      user's pocket.
+    </p>
+
+    <p>
+      At its core, the system uses the <strong>Model Context Protocol (MCP)</strong> — a
+      standardised, structured interface for securely fetching a user's complete financial
+      snapshot. This data is then processed by a FastAPI backend powered by
+      <strong>Groq's high-speed LLaMA-3</strong> large language models. The insights are
+      streamed as rich, parsed responses directly to a native Flutter mobile application.
+    </p>
+
+    <h3>How It Solves the Problem</h3>
+    <ul>
+      <li>
+        <strong>Unified Financial Dashboard:</strong> Aggregates net worth, transactions,
+        EPF balance, and credit score into a single, clean mobile interface.
+      </li>
+      <li>
+        <strong>Conversational Oracle Agent:</strong> Allows the user to ask free-form
+        natural language questions about their finances and receive contextual, data-driven
+        answers instantly.
+      </li>
+      <li>
+        <strong>Automated Security Alerts (Guardian):</strong> Proactively scans
+        transactions for anomalies and flags potential fraud or unusual spending without
+        the user having to ask.
+      </li>
+      <li>
+        <strong>Growth &amp; Investment Recommendations (Catalyst):</strong> Analyses
+        income vs. expenditure and suggests personalised investment opportunities and
+        savings strategies.
+      </li>
+      <li>
+        <strong>Resilient Architecture:</strong> Built-in fallback data mechanisms ensure
+        the dashboard and AI agents always have data to work with, even if external
+        services are temporarily unavailable.
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-num-footer">2</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 3 — FEATURES + TECH STACK
+══════════════════════════════════════════════════════════ -->
+<div class="page-wrapper page-break">
+
+  <!-- FEATURES -->
+  <div class="content-section">
+    <h2>3. Features</h2>
+
+    <h3>3.1 Oracle — AI Chat Assistant</h3>
+    <ul>
+      <li>Natural language conversational interface where users can ask any finance-related
+        question (e.g., "How much did I spend on food last month?", "Am I on track to
+        retire at 60?").</li>
+      <li>Responses are generated by Groq's LLaMA-3 model using the user's live financial
+        data as context, making every answer specific and personalised.</li>
+      <li>Markdown-formatted responses are parsed and rendered natively in the Flutter app
+        for a premium reading experience.</li>
+    </ul>
+
+    <h3>3.2 Guardian — Fraud &amp; Security Scanner</h3>
+    <ul>
+      <li>Automatically analyses transaction history for suspicious patterns, duplicate
+        charges, and unusual spikes in spending.</li>
+      <li>Summarises credit report anomalies and provides an easy-to-understand risk
+        assessment for the user.</li>
+    </ul>
+
+    <h3>3.3 Catalyst — Investment Opportunity Engine</h3>
+    <ul>
+      <li>Identifies surplus funds from the user's income-expense gap and suggests
+        actionable investment opportunities (SIPs, FDs, etc.).</li>
+      <li>Provides growth projections and highlights areas where better financial decisions
+        can be made.</li>
+    </ul>
+
+    <h3>3.4 Strategist — Market Cross-Reference</h3>
+    <ul>
+      <li>Cross-references the user's current portfolio performance against broad market
+        trends to provide a relative performance overview.</li>
+    </ul>
+
+    <h3>3.5 Net Worth Dashboard</h3>
+    <ul>
+      <li>Displays a consolidated real-time summary of all assets, liabilities, current
+        bank balances, EPF corpus, credit score, and total net worth.</li>
+      <li>Features a card-based, purple-themed UI with smooth animations for an
+        engaging user experience.</li>
+    </ul>
+
+    <h3>3.6 Goals &amp; Subscription Tracker</h3>
+    <ul>
+      <li>Allows users to set and monitor financial goals (e.g., saving for a house or
+        vacation).</li>
+      <li>Tracks all active subscriptions and recurring payments to prevent unnecessary
+        spending.</li>
+    </ul>
+
+    <h3>3.7 Firebase Authentication</h3>
+    <ul>
+      <li>Secure user login and registration using Firebase Authentication, with persistent
+        session management.</li>
+    </ul>
+
+    <h3>3.8 Notification &amp; Insights System</h3>
+    <ul>
+      <li>Insight cards on the home screen surface key findings from the AI agents
+        (e.g., "You have ₹15,000 in idle savings — consider a recurring deposit").</li>
+      <li>Configurable notification preferences for financial alerts.</li>
+    </ul>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="content-section">
+    <h2>4. Tech Stack</h2>
+
+    <table class="tech-table">
+      <tr>
+        <th>Layer</th>
+        <th>Technology / Tool</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td><strong>Frontend</strong></td>
+        <td>Flutter 3.8+ &nbsp;/&nbsp; Dart</td>
+        <td>Cross-platform mobile application (Android &amp; iOS)</td>
+      </tr>
+      <tr>
+        <td><strong>Backend</strong></td>
+        <td>Python 3.10+, FastAPI, Uvicorn</td>
+        <td>REST API server, AI orchestration, MCP integration</td>
+      </tr>
+      <tr>
+        <td><strong>AI / LLM</strong></td>
+        <td>Groq SDK, LLaMA-3 (llama3-70b-8192)</td>
+        <td>Natural language understanding and financial analysis</td>
+      </tr>
+      <tr>
+        <td><strong>Data Server</strong></td>
+        <td>Go 1.23+</td>
+        <td>MCP Mock Server — structured financial data APIs</td>
+      </tr>
+      <tr>
+        <td><strong>Authentication</strong></td>
+        <td>Firebase Auth, Firebase Admin SDK</td>
+        <td>User login, session management, identity validation</td>
+      </tr>
+      <tr>
+        <td><strong>Communication</strong></td>
+        <td>HTTP/REST, Server-Sent Events (SSE)</td>
+        <td>Real-time streaming of AI responses to the mobile client</td>
+      </tr>
+      <tr>
+        <td><strong>State Management</strong></td>
+        <td>Flutter Provider / setState</td>
+        <td>Local UI state management in the mobile app</td>
+      </tr>
+      <tr>
+        <td><strong>Environment</strong></td>
+        <td>Python dotenv (.env), flutter_dotenv</td>
+        <td>Secure management of API keys and config variables</td>
+      </tr>
+      <tr>
+        <td><strong>Dev Tools</strong></td>
+        <td>VS Code, Android Studio, Postman</td>
+        <td>Development, testing, and API debugging</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="page-num-footer">3</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 4 — SCREENSHOTS + USP + CHALLENGES
+══════════════════════════════════════════════════════════ -->
+<div class="page-wrapper page-break">
+
+  <!-- SCREENSHOTS -->
+  <div class="content-section">
+    <h2>5. Screenshots</h2>
+    <p>
+      The screenshots below illustrate the major screens and functionalities of the
+      Invested application. Annotated descriptions are provided alongside each placeholder.
+    </p>
+
+    <figure style="margin: 10px 0 16px 0; text-align: center;">
+      <img src="login.jpeg" alt="Login Screen"
+           style="max-width: 52%; border: 1px solid #ccc; border-radius: 8px;
+                  box-shadow: 0 3px 10px rgba(0,0,0,0.18);" />
+      <figcaption style="font-size: 11px; color: #555; margin-top: 6px; font-style: italic;">
+        Figure 1 — Login / Splash Screen (Firebase Authentication)
+      </figcaption>
+    </figure>
+
+    <figure style="margin: 10px 0 16px 0; text-align: center;">
+      <img src="dash.jpeg" alt="Net Worth Dashboard"
+           style="max-width: 52%; border: 1px solid #ccc; border-radius: 8px;
+                  box-shadow: 0 3px 10px rgba(0,0,0,0.18);" />
+      <figcaption style="font-size: 11px; color: #555; margin-top: 6px; font-style: italic;">
+        Figure 2 — Net Worth Dashboard (Home Screen)
+      </figcaption>
+    </figure>
+
+    <figure style="margin: 10px 0 16px 0; text-align: center;">
+      <img src="oracle.jpeg" alt="Oracle AI Chat"
+           style="max-width: 52%; border: 1px solid #ccc; border-radius: 8px;
+                  box-shadow: 0 3px 10px rgba(0,0,0,0.18);" />
+      <figcaption style="font-size: 11px; color: #555; margin-top: 6px; font-style: italic;">
+        Figure 3 — Oracle AI Chat (Real-Time Financial Q&amp;A)
+      </figcaption>
+    </figure>
+
+    <figure style="margin: 10px 0 16px 0; text-align: center;">
+      <img src="guardian.jpeg" alt="Guardian Security Alerts"
+           style="max-width: 52%; border: 1px solid #ccc; border-radius: 8px;
+                  box-shadow: 0 3px 10px rgba(0,0,0,0.18);" />
+      <figcaption style="font-size: 11px; color: #555; margin-top: 6px; font-style: italic;">
+        Figure 4 — Guardian Agent (Fraud &amp; Security Scanner)
+      </figcaption>
+    </figure>
+
+    <figure style="margin: 10px 0 16px 0; text-align: center;">
+      <img src="catalyst.jpeg" alt="Catalyst Investment Suggestions"
+           style="max-width: 52%; border: 1px solid #ccc; border-radius: 8px;
+                  box-shadow: 0 3px 10px rgba(0,0,0,0.18);" />
+      <figcaption style="font-size: 11px; color: #555; margin-top: 6px; font-style: italic;">
+        Figure 5 — Catalyst Agent (Investment Opportunity Engine)
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- USP -->
+  <div class="content-section">
+    <h2>6. Unique Selling Points (USP)</h2>
+
+    <ul>
+      <li>
+        <strong>Personalised AI, Not Generic Advice:</strong> Unlike standard budgeting
+        apps, Invested feeds the user's actual financial data as live context to the LLM.
+        Every answer is uniquely generated for that specific user, not pulled from a
+        template.
+      </li>
+      <li>
+        <strong>Multi-Agent Intelligence:</strong> Instead of a single AI model doing
+        everything, Invested uses specialised agents — Oracle (conversational), Guardian
+        (security), Catalyst (investment), and Strategist (market) — each optimised for
+        a specific financial domain.
+      </li>
+      <li>
+        <strong>MCP Integration:</strong> The system is built around the Model Context
+        Protocol, a structured and extensible standard for financial data exchange, making
+        it production-ready for real bank integrations.
+      </li>
+      <li>
+        <strong>Resilient by Design:</strong> Intelligent fallback data ensures the app
+        never crashes or shows blank data, even when external APIs are down — a feature
+        most student projects overlook.
+      </li>
+      <li>
+        <strong>Premium Mobile UI:</strong> No generic Material widgets — Invested features
+        a custom dark-purple themed, card-based interface with smooth animations and parsed
+        markdown rendering that feels like a professional product.
+      </li>
+    </ul>
+  </div>
+
+  <!-- CHALLENGES -->
+  <div class="content-section">
+    <h2>7. Challenges Faced</h2>
+
+    <h3>7.1 Real-Time LLM Streaming to Mobile</h3>
+    <p>
+      Streaming Server-Sent Events (SSE) from a FastAPI backend to a Flutter app with
+      correct chunk parsing and live UI updates was technically challenging. This was
+      resolved by implementing a custom Dart HTTP streaming client that appends each
+      incoming token to the chat bubble in real time.
+    </p>
+
+    <h3>7.2 AI Provider Migration</h3>
+    <p>
+      The project initially used Google Cloud's Vertex AI, which required billing
+      credentials. Midway through development, the backend was migrated entirely to the
+      Groq SDK (free tier) using LLaMA-3, requiring rewriting all tool-call definitions,
+      function schemas, and async call logic.
+    </p>
+
+    <h3>7.3 MCP Data Availability and Fallbacks</h3>
+    <p>
+      The Go-based MCP Mock Server occasionally fails to respond during testing (e.g.,
+      network timeouts on Android emulators). A dedicated fallback data layer was
+      implemented in the FastAPI backend that injects structured dummy financial data
+      (₹15 lakh net worth, 790 credit score) so the AI agents always have valid context
+      to respond with.
+    </p>
+
+    <h3>7.4 Parsing AI Markdown in Flutter</h3>
+    <p>
+      The LLM responses contained raw Markdown (bold text, bullet lists, tables) which
+      Flutter's default Text widget cannot render. A custom Markdown rendering widget was
+      integrated to convert the streamed response into a rich, formatted display.
+    </p>
+  </div>
+
+  <div class="page-num-footer">4</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 5 — FUTURE IMPROVEMENTS + CONCLUSION
+══════════════════════════════════════════════════════════ -->
+<div class="page-wrapper page-break">
+
+  <!-- FUTURE IMPROVEMENTS -->
+  <div class="content-section">
+    <h2>8. Future Improvements</h2>
+
+    <h3>8.1 Real Bank API Integration</h3>
+    <p>
+      Replace the Go MCP Mock Server with live connections to actual banking APIs (e.g.,
+      Account Aggregator framework in India, RBI-compliant open finance APIs). This would
+      allow the app to pull real-time transaction data directly from the user's linked
+      bank accounts with full consent management.
+    </p>
+
+    <h3>8.2 Personalised Goal-Based Planning</h3>
+    <p>
+      Enhance the Goals screen to allow the AI Catalyst agent to dynamically generate and
+      adjust a month-by-month savings plan based on the user's income, expenses, and
+      declared financial goals (home purchase, education, retirement, etc.).
+    </p>
+
+    <h3>8.3 Voice Interface</h3>
+    <p>
+      Integrate a voice-to-text input layer on the Oracle chat screen, enabling users to
+      ask financial questions hands-free — particularly useful while commuting or
+      multitasking.
+    </p>
+
+    <h3>8.4 Push Notifications for Smart Alerts</h3>
+    <p>
+      Extend the Guardian agent to send Firebase Cloud Messaging (FCM) push notifications
+      when anomalies are detected — e.g., if a transaction above a defined threshold
+      occurs or the credit score drops by more than 10 points.
+    </p>
+
+    <h3>8.5 Multi-Language Support</h3>
+    <p>
+      Add regional language support (Hindi, Tamil, Kannada) for the AI responses and UI
+      labels, drastically increasing accessibility for Tier-2 and Tier-3 city users who
+      are less comfortable with English financial terminology.
+    </p>
+
+    <h3>8.6 Scalability Enhancements</h3>
+    <ul>
+      <li>
+        <strong>Containerisation:</strong> Package the FastAPI backend and Go MCP server
+        into Docker containers and deploy via Kubernetes for horizontal scaling.
+      </li>
+      <li>
+        <strong>Caching Layer:</strong> Introduce Redis caching for MCP API responses to
+        reduce redundant external calls and improve response latency.
+      </li>
+      <li>
+        <strong>Model Fine-Tuning:</strong> Fine-tune an LLaMA-3 variant on Indian
+        financial terminology and regulatory context for more accurate and compliant
+        responses.
+      </li>
+      <li>
+        <strong>Web Application:</strong> Port the Flutter frontend to Flutter Web or
+        build a companion React-based web dashboard for desktop users.
+      </li>
+    </ul>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="content-section">
+    <h2>9. Conclusion</h2>
+
+    <p>
+      <strong>Invested</strong> is a full-stack, AI-first personal finance application
+      that successfully demonstrates how modern technologies — large language models, the
+      Model Context Protocol, FastAPI microservices, and Flutter — can be combined to
+      build a meaningful, production-grade financial tool.
+    </p>
+
+    <p>
+      The project goes well beyond a typical student CRUD application. It implements a
+      multi-agent AI architecture where each agent (Oracle, Guardian, Catalyst, Strategist)
+      plays a focused role; integrates a secure, structured financial data protocol (MCP);
+      streams real-time AI responses to a beautifully designed mobile interface; and
+      handles failure gracefully through an intelligent fallback system.
+    </p>
+
+    <p>
+      The development of this project provided hands-on experience with AI/ML integration,
+      REST API design, cross-platform mobile development, and production reliability
+      concerns — all highly relevant skills in today's software engineering landscape. The
+      challenges encountered during development — particularly the AI provider migration
+      and real-time streaming — deepened the understanding of building resilient,
+      API-dependent systems.
+    </p>
+
+    <p>
+      With planned improvements such as real bank API integration, push notifications, and
+      multi-language support, Invested has the potential to evolve into a fully deployable
+      consumer product. It represents a genuine attempt at solving a real-world problem
+      with a thoughtful, technically sound, and user-centric approach.
+    </p>
+
+    <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;" />
+
+    <p style="text-align:center; font-size: 11px; color: #666; font-style: italic;">
+      — End of Documentation —
+    </p>
+    <p style="text-align:center; font-size: 11px; color: #666;">
+      Shivam M K &nbsp;|&nbsp; Capstone Project – AI Lab &nbsp;|&nbsp; April 2026
+    </p>
+  </div>
+
+  <div class="page-num-footer">5</div>
+</div>
+
+</body>
+</html>
